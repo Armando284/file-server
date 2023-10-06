@@ -38,7 +38,7 @@ func uploadMultipleFile(ctx *gin.Context) {
 			log.Fatal(err)
 		}
 	}
-	ctx.HTML(http.StatusOK, "saved.tmpl", gin.H{"name": "Fotos Guardadas", "filepaths": filePaths})
+	ctx.HTML(http.StatusOK, "saved.html", gin.H{"name": "Fotos Guardadas", "filepaths": filePaths})
 }
 
 func init() {
@@ -53,6 +53,7 @@ func init() {
 func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("public/templates/*")
+	router.Static("/assets", "public/assets")
 	// router.
 	router.GET("/healthchecker", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{"status": "success", "message": "How to Upload Single and Multiple Files in Golang"})
