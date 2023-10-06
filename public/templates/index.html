@@ -30,7 +30,7 @@
             multiple />
           <div class="btn-group">
             <button
-              id="cancel"
+              id="cancel-btn"
               class="btn">
               Cancelar
             </button>
@@ -42,11 +42,25 @@
         </form>
       </div>
     </div>
+
+    {{if .done}}
     <div class="file-preview-container">
+      <h2>{{ .msg }}</h2>
       <div
         class="file-preview"
-        id="file-preview"></div>
+        id="file-preview">
+        {{ range .filepaths }}
+        <img
+          class="file-preview__img"
+          src="{{ . }}"
+          alt="image uploaded"
+          width="200" />
+        {{ end }}
+      </div>
     </div>
-    {{ template "footer.html" }}
+    {{end}} {{ template "footer.html" }}
+    <script
+      src="assets/js/index.js"
+      defer></script>
   </body>
 </html>
