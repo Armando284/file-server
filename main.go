@@ -23,7 +23,7 @@ func uploadMultipleFile(ctx *gin.Context) {
 		originalFileName := strings.TrimSuffix(filepath.Base(file.Filename), filepath.Ext(file.Filename))
 		now := time.Now()
 		filename := strings.ReplaceAll(strings.ToLower(originalFileName), " ", "-") + "-" + fmt.Sprintf("%v", now.Unix()) + fileExt
-		filePath := "http://localhost:8000/images/" + filename
+		filePath := "/images/" + filename
 
 		filePaths = append(filePaths, filePath)
 		out, err := os.Create("./uploads/" + filename)
@@ -38,7 +38,7 @@ func uploadMultipleFile(ctx *gin.Context) {
 			log.Fatal(err)
 		}
 	}
-	ctx.HTML(http.StatusOK, "saved.html", gin.H{"name": "Fotos Guardadas", "filepaths": filePaths})
+	ctx.HTML(http.StatusOK, "index.html", gin.H{"done": true, "msg": "Fotos Guardadas", "filepaths": filePaths})
 }
 
 func init() {
